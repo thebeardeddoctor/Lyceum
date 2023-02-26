@@ -1,0 +1,30 @@
+{
+	"python.analysis.packageIndexDepths": [
+		{
+			"name": "sklearn",
+			"depth": 2
+		},
+		{
+			"name": "matplotlib",
+			"depth": 2
+		},
+		{
+			"name": "scipy",
+			"depth": 2
+		},
+		{
+			"name": "django",
+			"depth": 2
+		}
+	],
+	"[erb]": {
+		"editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[ruby]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	}
+}
