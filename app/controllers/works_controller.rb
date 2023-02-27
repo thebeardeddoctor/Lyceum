@@ -8,6 +8,7 @@ class WorksController < ApplicationController
 
   # GET /works/1 or /works/1.json
   def show
+    @work = Work.find(params[:id])
   end
 
   # GET /works/new
@@ -65,6 +66,6 @@ class WorksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_params
-      params.fetch(:work, {})
+      params.require(:work).permit(:title, :body)
     end
 end

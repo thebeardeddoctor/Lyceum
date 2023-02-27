@@ -1,14 +1,11 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Works</h1>
-
 <div id="works">
-  <% @works.each do |work| %>
-    <%= render work %>
-    <p>
-      <%= link_to "Show this work", work %>
-    </p>
-  <% end %>
+	<% @works.each do |work| %>
+		<p><%= render work %></p>
+		<p>
+			<%= link_to "Show this work", work %>
+		</p>
+	<% end %>
 </div>
-
 <%= link_to "New work", new_work_path %>
