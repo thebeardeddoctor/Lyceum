@@ -76,3 +76,4 @@ gem "font-awesome-sass", "~> 6.3.0"
 
 #auth(devise/letter opener/wicked)
 gem 'devise'
+gem "letter_opener", group: :development
