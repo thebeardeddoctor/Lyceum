@@ -75,4 +75,4 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 gem "font-awesome-sass", "~> 6.3.0"
 
 #auth(devise/letter opener/wicked)
-
+gem 'devise'
