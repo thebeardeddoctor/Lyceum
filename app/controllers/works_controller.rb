@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   before_action :set_work, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!, except: %i[show index]
   # GET /works or /works.json
   def index
     @works = Work.all
@@ -23,7 +23,7 @@ class WorksController < ApplicationController
   # POST /works or /works.json
   def create
     @work = Work.new(work_params)
-
+    @work.user = current_user
     respond_to do |format|
       if @work.save
         format.html { redirect_to work_url(@work), notice: "Work was successfully created." }
