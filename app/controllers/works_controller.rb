@@ -1,4 +1,5 @@
 class WorksController < ApplicationController
+  layout "full_screen", only: [:new, :edit]
   before_action :set_work, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[show index]
   # GET /works or /works.json
@@ -13,6 +14,7 @@ class WorksController < ApplicationController
 
   # GET /works/new
   def new
+    
     @work = Work.new
   end
 

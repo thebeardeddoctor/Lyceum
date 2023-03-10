@@ -9,15 +9,15 @@
 			</ul>
 		</div>
 	<% end %>
-	<div>
-		<%= form.label :title, style: "display: block" %>
-		<%= form.text_field :title %>
+	<div class="container mb-3">
+		<%= form.label :title, class: "form-label" %>
+		<%= form.text_field :title, class: "form-control"%>
 	</div>
-	<div>
-		<%= form.label :body, style: "display: block" %>
-		<%= form.text_area :body %>
+	<div class="container mb-3">
+		<%= form.label :body, class: "form-label" %>
+		<%= form.rich_text_area :body, class: "form-control vh-100" %>
 	</div>
-	<div>
-		<%= form.submit %>
+	<div style= "margin-left: 8rem"class=" position-absolute top-0 start-5 mt-3  ">
+		<%= form.submit "create", class: "border-0 bg-transparent text-muted"%>
 	</div>
 <% end %>
