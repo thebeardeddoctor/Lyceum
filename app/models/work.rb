@@ -4,5 +4,5 @@ class Work < ApplicationRecord
  validates :goal, presence: true
  validates :timeline, presence: true
  has_rich_text :body
- has_many :comments
+ has_many :comments, dependent: :destroy
 end

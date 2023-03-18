@@ -16,13 +16,23 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment =@post.comments.find(params[:id])
+   
+    respond_to do |format|
+      
+      if @comment.update(comment_params)
+        format.html{redirect_to work_url(@work), notice: "Comment was successfully updated."} 
+      else
+        format.html { redirect_to work_url(@work), alert: "Comment was not updated." }
+      end
+    end
   end
 
   def edit
   end
 
   def destroy
-    @comment = @post.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
     redirect_to work_path(@work)
   end

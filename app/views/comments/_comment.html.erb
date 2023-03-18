@@ -1,5 +1,22 @@
-<div class="comment-<%=comment.id%> container shadow rounded mt-5 pt-2 pb-2">
-	@<%= comment.user.user_name%> <%= time_ago_in_words(comment.created_at)%> ago<br/>
+<div class="comment-<%=comment.id%> container shadow rounded mt-3 pt-2 pb-2">
+	@<%= comment.user.user_name%> <%= time_ago_in_words(comment.created_at)%> ago	
+	<%if comment.parent_id%>
+		<span>to @<%=comment.parent.user.user_name%></span>
+	<%end%>
+	<%if current_user == comment.user %>
+		<div class="btn-group float-end">
+			<%= link_to nil, remote: true, class: " text-dark" do %>
+				<i class="fa-solid fa-pen-to-square"></i>
+			<%end%>
+			<%=button_to [@work,comment], class:" border-0 bg-transparent", method: :delete do%>
+				<i class="fa-solid fa-trash "></i>
+			<%end%>
+		</div>
+	<%end%><br/>
 	<hr/>
 	<%=comment.body%>
+	<%=render "comments/form", work: comment.work, parent: comment%>
+</div>
+<div class="ps-5">
+	<%= render comment.comments.order(id: :desc)%>
 </div>

@@ -1,8 +1,9 @@
-<div class="container shadow vh-100 mt-5">
+<div class="container rounded shadow vh-100 mt-5">
 	<p><%=@work.created_at.strftime("Posted on %B %d, %Y at %H:%M") %> </p>
-	<p class="float-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%= link_to @work, method: :delete,:confirm => "Are you sure?", class: " text-dark" do %>
-			<i class="fa-solid fa-trash"></i>
-		<%end%></p>
+	<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%=button_to nil, class:"float-end border-0 bg-transparent", method: :delete do%>
+			<i class="fa-solid fa-trash "></i>
+		<%end%>
+	</div>
 	<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(@work), class: " text-dark" do %>
 			<i class="fa-solid fa-pen-to-square"></i>
 		<%end%></p>
@@ -11,7 +12,9 @@
 	<hr/>
 	<p><%=@work.body%></p>
 </div>
-<%= render "comments/form", work: @work, class: "mb-5"%>
+<div class="container rounded shadow">
+	<%= render "comments/form", work: @work, parent: nil %>
+</div>
 <%@comments.each do |comment|%>
 	<%= render "comments/comment", work: @work, comment: comment%>
 <%end%>
@@ -20,3 +23,9 @@
 	<%= link_to "Back to works", works_path %>
 	<%= button_to "Destroy this work", @work, method: :delete %>
 </div>
+<script type="text/javascript">
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+	return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
+</script>
