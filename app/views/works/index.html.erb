@@ -1,11 +1,28 @@
 <p style="color: green"><%= notice %></p>
-<h1>Works</h1>
+<h1 class='text-center'>Projects</h1>
 <div id="works">
 	<% @works.each do |work| %>
-		<p><%= render work %></p>
-		<p>
-			<%= link_to "Show this work", work %>
-		</p>
+		<div class="container shadow rounded pt-2">
+			<p><%=work.created_at.strftime("%B %d, %Y at %H:%M") %> </p>
+			<p class="float-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%= link_to work, method: :delete,:confirm => "Are you sure?", class: " text-dark" do %>
+					<i class="fa-solid fa-trash"></i>
+				<%end%></p>
+			<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(work), class: " text-dark" do %>
+					<i class="fa-solid fa-pen-to-square"></i>
+				<%end%></p>
+			<p class="float-end me-2 "data-bs-toggle="tooltip" data-bs-placement="top" title="New"><%= link_to new_work_path, class: "text-dark" do%>
+					<i class="fa-solid fa-plus "></i>
+				<%end%></p>
+			<p><%=work.user.user_name%></p>
+			<h3><%= link_to work.title, work, class: ' text-dark text-decoration-none' %></h3>
+			<hr/>
+			<p class='pb-2'><%=work.description%></p>
+		</div>
 	<% end %>
 </div>
-<%= link_to "New work", new_work_path %>
+<script type="text/javascript">
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+	return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
+</script>

@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  
   get 'users/profile'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations"
   }
-  resources :works
+  resources :works do 
+    resources :comments
+
+  end
+  resources :comments do 
+    resources :comments
+  end
   get 'u/:id', to: 'user#profile', as: 'user'
   get 'pages/home'
   get 'pages/about'

@@ -9,15 +9,46 @@
 			</ul>
 		</div>
 	<% end %>
-	<div class="container mb-3">
-		<%= form.label :title, class: "form-label" %>
-		<%= form.text_field :title, class: "form-control"%>
-	</div>
-	<div class="container mb-3">
-		<%= form.label :body, class: "form-label" %>
+	<div class="mt-5 mb-3">
 		<%= form.rich_text_area :body, class: "form-control vh-100" %>
 	</div>
-	<div style= "margin-left: 8rem"class=" position-absolute top-0 start-5 mt-3  ">
-		<%= form.submit "create", class: "border-0 bg-transparent text-muted"%>
+	<button class="border-0 bg-transparent position-absolute top-0 end-0 mt-3 mx-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-gear"></i></button>
+	<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+		<div class="offcanvas-header">
+			<h5 id="offcanvasRightLabel">Project Settings</h5>
+			<button type="button"  class="border-0 bg-transparent" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-gear"></i></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="container">
+				<%= form.label :title, class: "form-label" %>
+			</div>
+			<div>
+				<%= form.text_field :title, class: "form-control mb-3"%>
+			</div>
+			<div class="container ">
+				<%= form.label :Description, class: "form-label" %>
+			</div>
+			<div>
+				<%= form.text_field :description, class: "form-control mb-3", style: "height:120px"%>
+			</div>
+			<div class="container ">
+				<%= form.label :goal, class: "form-label" %>
+			</div>
+			<div>
+				<%= form.select :goal, ['Publication', 'Presentation', 'both'],{},class: "form-select mb-3 " %>
+			</div>
+			<div class="container ">
+				<%= form.label :Timeline_in_weeks, class: "form-label"%>
+			</div>
+			<div >
+				<%= form.number_field :timeline, in: 1.0..20.0, step: 1, class: " mb-3 form-control"%>
+			</div>
+		</div>
+	</div>
+	<div style= "margin-left: 4rem" class=" position-absolute top-0 start-5 mt-3  ">
+		<%= form.submit "< Works", class: "border-0 bg-transparent text-muted"%>
+	</div>
+	<div style= "margin-left: 8rem" class=" position-absolute top-0 start-5 mt-3  ">
+		<%= form.submit "Preview", class: "border-0 bg-transparent text-muted"%>
 	</div>
 <% end %>

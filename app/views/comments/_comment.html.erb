@@ -1,0 +1,5 @@
+<div class="comment-<%=comment.id%> container shadow rounded mt-5 pt-2 pb-2">
+	@<%= comment.user.user_name%> <%= time_ago_in_words(comment.created_at)%> ago<br/>
+	<hr/>
+	<%=comment.body%>
+</div>

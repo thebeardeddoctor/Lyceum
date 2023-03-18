@@ -1,6 +1,20 @@
-<p style="color: green"><%= notice %></p>
-<p></p>
-<%= render @work %>
+<div class="container shadow vh-100 mt-5">
+	<p><%=@work.created_at.strftime("Posted on %B %d, %Y at %H:%M") %> </p>
+	<p class="float-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%= link_to @work, method: :delete,:confirm => "Are you sure?", class: " text-dark" do %>
+			<i class="fa-solid fa-trash"></i>
+		<%end%></p>
+	<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(@work), class: " text-dark" do %>
+			<i class="fa-solid fa-pen-to-square"></i>
+		<%end%></p>
+	<h3><%= @work.title %></h3>
+	<p><%=@work.user.user_name%></p>
+	<hr/>
+	<p><%=@work.body%></p>
+</div>
+<%= render "comments/form", work: @work, class: "mb-5"%>
+<%@comments.each do |comment|%>
+	<%= render "comments/comment", work: @work, comment: comment%>
+<%end%>
 <div>
 	<%= link_to "Edit this work", edit_work_path(@work) %> |
 	<%= link_to "Back to works", works_path %>

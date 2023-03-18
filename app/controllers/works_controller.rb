@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  layout "full_screen", only: [:new, :edit]
+  layout "full_screen", except: %i[show index]
   before_action :set_work, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: %i[show index]
   # GET /works or /works.json
@@ -9,7 +9,8 @@ class WorksController < ApplicationController
 
   # GET /works/1 or /works/1.json
   def show
-    @work = Work.find(params[:id])
+    @comments = @work.comments.order(created_at: :desc)
+    
   end
 
   # GET /works/new
@@ -41,6 +42,7 @@ class WorksController < ApplicationController
   def update
     respond_to do |format|
       if @work.update(work_params)
+        format.html{redirect_to works_path,notice: "Work was successfully updated."} if go_to_work?
         format.html { redirect_to work_url(@work), notice: "Work was successfully updated." }
         format.json { render :show, status: :ok, location: @work }
       else
@@ -68,6 +70,10 @@ class WorksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_params
-      params.require(:work).permit(:title, :body)
+      params.require(:work).permit(:title, :body, :description, :goal, :timeline)
+    end
+
+    def go_to_work?
+      params[:commit]== '< Works'
     end
 end
