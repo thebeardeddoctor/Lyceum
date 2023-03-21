@@ -9,9 +9,7 @@ Rails.application.routes.draw do
     resources :comments
 
   end
-  resources :comments do 
-    resources :comments
-  end
+
   get 'u/:id', to: 'user#profile', as: 'user'
   get 'pages/home'
   get 'pages/about'

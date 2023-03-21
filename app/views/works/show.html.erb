@@ -12,7 +12,7 @@
 	<hr/>
 	<p><%=@work.body%></p>
 </div>
-<div class="container rounded shadow">
+<div class="container rounded shadow mt-3"> Leave a comment!
 	<%= render "comments/form", work: @work, parent: nil %>
 </div>
 <%@comments.each do |comment|%>

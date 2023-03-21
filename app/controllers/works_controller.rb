@@ -10,7 +10,6 @@ class WorksController < ApplicationController
   # GET /works/1 or /works/1.json
   def show
     @comments = @work.comments.where(parent_id: nil).order(created_at: :desc)
-    @replies = @work.comments.where(parent_id: !nil).order(created_at: :desc)
     
   end
 
