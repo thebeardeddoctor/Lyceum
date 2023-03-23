@@ -1,7 +1,7 @@
 class WorksController < ApplicationController
   layout "full_screen", except: %i[show index]
   before_action :set_work, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[show index]
+  before_action :authenticate_user!, except: %i[index]
   # GET /works or /works.json
   def index
     @works = Work.all
@@ -9,7 +9,7 @@ class WorksController < ApplicationController
 
   # GET /works/1 or /works/1.json
   def show
-    @comments = @work.comments.where(parent_id: nil).order(created_at: :desc)
+    @comments = @work.comments.where(parent_id: nil).order(id: :desc)
     
   end
 
