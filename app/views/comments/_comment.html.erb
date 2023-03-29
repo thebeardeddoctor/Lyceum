@@ -1,4 +1,4 @@
-<div class="comment-<%=comment.id%> container shadow rounded mt-3 pt-2 pb-2">
+<div id="comment-<%=comment.id%>" class="container shadow rounded mt-3 pt-1 pb-1">
 	@<%= comment.user.user_name%>
 	<%if !comment.parent_id.nil?%>
 		<span>to @<%=comment.parent.user.user_name%></span>
@@ -6,30 +6,34 @@
 	<%= time_ago_in_words(comment.created_at)%> ago	
 	<%if current_user == comment.user %>
 		<div class="btn-group float-end">
-			<%= link_to nil, remote: true, class: "text-dark pe-2", data: {controller: "comments",
+			<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Reply"><%= link_to nil, remote: true, class: "text-dark pe-2", data: {controller: "comments",
 			 action: "comments#toggleReply",
 				comments_reply_param: "comment-#{comment.id}-reply",
-				comments_field_param: "comment-#{comment.id}-reply",
+				comments_form_param: "edit-form-#{comment.id}",
+				comments_body_param: "comment-body-#{comment.id}",
 
 			} do %>
-				<i class="fa-solid fa-reply"></i>
-			<%end%>
-			<%= link_to nil, remote: true, class: " text-dark", data: {controller: "comments",
+					<i class="fa-solid fa-reply"></i>
+				<%end%>
+			</div>
+			<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to nil, remote: true, class: " text-dark", data: {controller: "comments",
 			 action: "comments#toggleForm",
 				comments_form_param: "edit-form-#{comment.id}",
-				comments_body_param: "comment-body-#{comment.id}"
+				comments_body_param: "comment-body-#{comment.id}",
+				comments_reply_param: "comment-#{comment.id}-reply",
 			} do %>
-				<i class="fa-solid fa-pen-to-square"></i>
-			<%end%>
-			<%=button_to [@work,comment], class:" border-0 bg-transparent", method: :delete do%>
-				<i class="fa-solid fa-trash "></i>
-			<%end%>
+					<i class="fa-solid fa-pen-to-square"></i>
+				<%end%>
+			</div>
+			<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%=button_to [@work,comment], class:" border-0 bg-transparent", method: :delete do%>
+					<i class="fa-solid fa-trash "></i>
+				<%end%>
+			</div>
 		</div>
 		<div id="edit-form-<%=comment.id%>" class="d-none">
 			<%= render 'comments/form', work: @work, comment: comment, parent: comment.parent%>
 		</div>
 		<br/>
-		<hr/>
 		<div id='comment-body-<%=comment.id%>'>
 			<%=comment.body%>
 		</div>

@@ -1,0 +1,31 @@
+<%if current_user%>
+	<li class= "nav-item dropdown rounded">
+		<a class= 'nav-link ' href='#' id = 'navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+			<i class="fa-solid fa-bell fa-xl"></i>
+			<span class= 'badge rounded-circle bg-danger position-absolute top-1 start-90 translate-middle'>
+				<%= @unread.count >= 99 ? "99+" : @unread.count %>
+			</span>
+		</a>
+		<ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+			<% @notifications.each do |notification|%>
+				<% if notification.unread? %>
+					<li class= 'dropdown-item bg-secondary-subtle '>
+						<%= link_to notification.to_notification.message, notification.to_notification.url, class:"text-decoration-none text-dark"%>
+					</li>
+				<% elsif notification.read?%>
+					<li class= 'dropdown-item '>
+						<%= link_to notification.to_notification.message, notification.to_notification.url, class:"text-decoration-none text-dark"%>
+					</li>
+				<%end%>
+				<li class= 'dropdown-item '>
+					<%= link_to "see all notifications", {},class:"text-decoration-none text-dark"%>
+				</li>
+			<%end%>
+			<%if @notifications.length == 0%>
+				<li class= 'dropdown-item bg-secondary-subtle'>
+					No notifications yet...
+				</li>
+			<%end%>
+		</ul>
+	</li>
+<%end%>

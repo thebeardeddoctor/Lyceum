@@ -45,10 +45,8 @@
 			</div>
 		</div>
 	</div>
-	<div style= "margin-left: 4rem" class=" position-absolute top-0 start-5 mt-3  ">
-		<%= form.submit "< Works", class: "border-0 bg-transparent text-muted"%>
-	</div>
-	<div style= "margin-left: 8rem" class=" position-absolute top-0 start-5 mt-3  ">
-		<%= form.submit "Preview", class: "border-0 bg-transparent text-muted"%>
+	<div style= "margin-left: 2rem" class=" position-absolute top-0 start-5 mt-3 ">
+		<%= link_to "Projects", works_path,class: "text-muted text-decoration-none"%>
+		<%= form.submit "Save", class: "text-muted border-0 bg-transparent "%>
 	</div>
 <% end %>

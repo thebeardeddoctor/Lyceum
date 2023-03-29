@@ -8,15 +8,15 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save! 
       flash[:notice] = "comment was saved"
-      redirect_to work_path(@work)
+      redirect_to work_path(@work, {}, anchor: @comment)
     else
       flash[:alert]= "comment was not saved"
-      redirect_to work_path(@work)
+      redirect_to work_path(@work, {}, anchor: @comment)
     end
   end
 
   def update
-    @comment =@post.comments.find(params[:id])
+    @comment = @work.comments.find(params[:id])
    
     respond_to do |format|
       

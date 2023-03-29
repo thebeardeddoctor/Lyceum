@@ -1,12 +1,14 @@
 <div class="container rounded shadow vh-100 mt-5">
 	<p><%=@work.created_at.strftime("Posted on %B %d, %Y at %H:%M") %> </p>
-	<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%=button_to nil, class:"float-end border-0 bg-transparent", method: :delete do%>
-			<i class="fa-solid fa-trash "></i>
-		<%end%>
-	</div>
-	<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(@work), class: " text-dark" do %>
-			<i class="fa-solid fa-pen-to-square"></i>
-		<%end%></p>
+	<%if current_user== @work.user%>
+		<div class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%=button_to nil, class:"float-end border-0 bg-transparent", method: :delete do%>
+				<i class="fa-solid fa-trash "></i>
+			<%end%>
+		</div>
+		<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(@work), class: " text-dark" do %>
+				<i class="fa-solid fa-pen-to-square"></i>
+			<%end%></p>
+	<%end%>
 	<h3><%= @work.title %></h3>
 	<p><%=@work.user.user_name%></p>
 	<hr/>
@@ -19,13 +21,5 @@
 	<%= render "comments/comment", work: @work, comment: comment%>
 <%end%>
 <div>
-	<%= link_to "Edit this work", edit_work_path(@work) %> |
-	<%= link_to "Back to works", works_path %>
-	<%= button_to "Destroy this work", @work, method: :delete %>
+	<%= link_to "See Portfolio", works_path %>
 </div>
-<script type="text/javascript">
-	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-	return new bootstrap.Tooltip(tooltipTriggerEl)
-	})
-</script>

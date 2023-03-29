@@ -1,24 +1,32 @@
 <p style="color: green"><%= notice %></p>
 <h1 class='text-center'>Projects</h1>
 <div id="works">
-	<% @works.each do |work| %>
-		<div class="container shadow rounded pt-2">
-			<p><%=work.created_at.strftime("%B %d, %Y at %H:%M") %> </p>
-			<p class="float-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%= link_to work, method: :delete,:confirm => "Are you sure?", class: " text-dark" do %>
-					<i class="fa-solid fa-trash"></i>
-				<%end%></p>
-			<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(work), class: " text-dark" do %>
-					<i class="fa-solid fa-pen-to-square"></i>
-				<%end%></p>
-			<p class="float-end me-2 "data-bs-toggle="tooltip" data-bs-placement="top" title="New"><%= link_to new_work_path, class: "text-dark" do%>
-					<i class="fa-solid fa-plus "></i>
-				<%end%></p>
-			<p><%=work.user.user_name%></p>
-			<h3><%= link_to work.title, work, class: ' text-dark text-decoration-none' %></h3>
-			<hr/>
-			<p class='pb-2'><%=work.description%></p>
-		</div>
-	<% end %>
+	<%if Work.all.length == 0%>
+		<p class=" text-center"data-bs-toggle="tooltip" data-bs-placement="top" title="New">There are no projects! Start one now <%= link_to new_work_path, class: "text-dark" do%>
+				<i class="fa-solid fa-plus "></i>
+			<%end%></p>
+	<%else%>
+		<% @works.each do |work| %>
+			<div class="container shadow rounded pt-2">
+				<p><%=work.created_at.strftime("%B %d, %Y at %H:%M") %> </p>
+				<% if current_user == work.user%>
+					<p class="float-end " data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><%= link_to work, method: :delete,:confirm => "Are you sure?", class: " text-dark" do %>
+							<i class="fa-solid fa-trash"></i>
+						<%end%></p>
+					<p class="float-end me-2"data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><%= link_to edit_work_path(work), class: " text-dark" do %>
+							<i class="fa-solid fa-pen-to-square"></i>
+						<%end%></p>
+					<p class="float-end me-2 "data-bs-toggle="tooltip" data-bs-placement="top" title="New"><%= link_to new_work_path, class: "text-dark" do%>
+							<i class="fa-solid fa-plus "></i>
+						<%end%></p>
+				<%end%>
+				<p><%=work.user.user_name%></p>
+				<h3><%= link_to work.title, work, class: ' text-dark text-decoration-none' %></h3>
+				<hr/>
+				<p class='pb-2'><%=work.description%></p>
+			</div>
+		<% end %>
+	<%end%>
 </div>
 <script type="text/javascript">
 	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
