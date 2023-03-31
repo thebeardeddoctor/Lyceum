@@ -4,12 +4,12 @@ class WorksController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   # GET /works or /works.json
   def index
-    @works = Work.all
+    @works = Work.includes([:user]).all.order(id: :desc)
   end
 
   # GET /works/1 or /works/1.json
   def show
-    @comments = @work.comments.where(parent_id: nil).order(id: :desc)
+    @comments = @work.comments.where(parent_id: nil).includes([:user],[:parent]).order(id: :desc)
     
   end
 

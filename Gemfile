@@ -79,3 +79,5 @@ gem "font-awesome-sass", "~> 6.3.0"
 gem 'devise'
 gem "letter_opener", group: :development
 gem "noticed", "~> 1.6"
+
+gem "bullet", "~> 7.0"
