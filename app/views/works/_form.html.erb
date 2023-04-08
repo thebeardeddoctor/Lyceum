@@ -16,7 +16,7 @@
 	<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 		<div class="offcanvas-header">
 			<h5 id="offcanvasRightLabel">Project Settings</h5>
-			<button type="button"  class="border-0 bg-transparent" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-gear"></i></button>
+			<button type="button"  class="border-0 bg-transparent" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-xmark fa-xl"></i></button>
 		</div>
 		<div class="offcanvas-body">
 			<div class="container">
@@ -32,10 +32,14 @@
 				<%= form.text_field :description, class: "form-control mb-3", style: "height:120px"%>
 			</div>
 			<div class="container ">
+				<%= form.label :Specialty, class: "form-label" %>
+			</div>
+			<%= form.select :specialty, Work::Specialty , { :include_blank => "Select Specialty" }, class:"form-select mb-3" %>
+			<div class="container ">
 				<%= form.label :goal, class: "form-label" %>
 			</div>
 			<div>
-				<%= form.select :goal, ['Publication', 'Presentation', 'both'],{},class: "form-select mb-3 " %>
+				<%= form.select :goal, ['Publication', 'Presentation', 'Publication/Presentation '],{:prompt => "Select Goal"},class: "form-select mb-3 " %>
 			</div>
 			<div class="container ">
 				<%= form.label :Timeline_in_weeks, class: "form-label"%>

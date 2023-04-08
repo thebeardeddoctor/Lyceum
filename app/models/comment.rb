@@ -10,7 +10,9 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
+    if self.user != work.user
     CommentNotification.with(comment: self, work: work).deliver_later(work.user)
+    end
   end
 
   def cleanup_nofitication

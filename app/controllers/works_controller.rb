@@ -9,7 +9,7 @@ class WorksController < ApplicationController
 
   # GET /works/1 or /works/1.json
   def show
-    @comments = @work.comments.where(parent_id: nil).includes([:user],[:parent]).order(id: :desc)
+    @comments = @work.comments.where(parent_id: nil).includes([:user],[:parent], [:rich_text_body]).order(id: :desc)
     
   end
 
@@ -69,7 +69,7 @@ class WorksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_params
-      params.require(:work).permit(:title, :body, :description, :goal, :timeline)
+      params.require(:work).permit(:title, :body, :description, :goal,:specialty, :timeline)
     end
 
 end
