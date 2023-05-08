@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  parent_id  :integer
+#  user_id    :integer          not null
+#  work_id    :integer          not null
+#
+# Indexes
+#
+#  index_comments_on_user_id  (user_id)
+#  index_comments_on_work_id  (work_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
+#  work_id  (work_id => works.id)
+#
 require "test_helper"
 
 class CommentTest < ActiveSupport::TestCase
